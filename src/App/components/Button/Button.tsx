@@ -8,7 +8,7 @@ const Button: React.FC<I_PropsButton> = (props) => {
   console.log(props);
 
   return (
-    <button
+    <button className="Button" style={ {color:'blue'} } 
       onClick={() => {
         props.onButtonClicked('Le boutton est bien');
       }}

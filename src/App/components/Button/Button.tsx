@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from './Button.module.css';
 import PropTypes from 'prop-types';
 
@@ -13,13 +13,22 @@ const Button: React.FC<I_PropsButton> = (props) => {
   console.log(props);
   // decl d'un gestionnaire d'etat avec declenchement de rendu aux changements*/
   const [isClicked, setisClicked] = useState(false);
+  // hook d'effet pour catcher les changements d'etat et effectuer des actions suite aux changements*/
+  useEffect(() => {
+    if(isClicked){setTimeout(()=>setisClicked(false),1000);}
+    // fonction de deomntage de la valeur
+    return () => {
+      //effect
+    };
+  }, [isClicked])
+  //tableau d'inspection de montage/changement de valeurpour le declenchement
   return (
     <button className={style.Button} style={{backgroundColor:props.bgColor}}
       onClick={() => {
         /* moddif de la valeur par le modifficateur associé*/
         setisClicked(true);
         /*ancienne valeur car moddif async fait par la fonction*/
-        console.trace(isClicked);
+        console.log(isClicked);
         //props.onButtonClicked('Le boutton est bien');
       }}
     >

@@ -8,7 +8,7 @@ interface I_PropsButton {
   //forcer l'array pour children
   children:Array<any>;
   bgColor?:string;
-  type:'button'|'submit'|'reset'|undefined;
+  type?:'button'|'submit'|'reset';
 }
 const Button: React.FC<I_PropsButton> = (props) => {
   console.log(props);

@@ -23,7 +23,7 @@ const Button: React.FC<I_PropsButton> = (props) => {
   }, [isClicked])
   //tableau d'inspection de montage/changement de valeurpour le declenchement
   return (
-    <button className={style.Button} style={{backgroundColor:props.bgColor}}
+    <button className={`${style.Button}${isClicked?' '+style.clicked:''}`} style={{backgroundColor:props.bgColor}}
       onClick={() => {
         /* moddif de la valeur par le modifficateur associé*/
         setisClicked(true);

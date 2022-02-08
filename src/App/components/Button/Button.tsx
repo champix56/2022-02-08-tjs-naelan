@@ -1,5 +1,6 @@
 import React from "react";
 import style from './Button.module.css';
+import PropTypes from 'prop-types';
 
 
 interface I_PropsButton {
@@ -24,3 +25,9 @@ const Button: React.FC<I_PropsButton> = (props) => {
   );
 };
 export default Button;
+Button.propTypes={
+  bgColor: PropTypes.string.isRequired
+}
+Button.defaultProps={
+ //bgColor:'tomato'
+}

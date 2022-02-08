@@ -1,6 +1,8 @@
 import React from "react";
 interface I_PropsButton {
   onButtonClicked:Function;
+  //forcer l'array pour children
+  children:Array<any>;
 }
 const Button: React.FC<I_PropsButton> = (props) => {
   console.log(props);

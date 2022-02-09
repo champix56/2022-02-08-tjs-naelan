@@ -24,14 +24,14 @@ const MemeForm: FC<MemeFormProps> = (props) => {
           const changedMeme: I_meme = {
             title: event.currentTarget["titre"].value,
             text: event.currentTarget["text"].value,
-            x: event.currentTarget["x"].value,
-            y: event.currentTarget["y"].value,
-            fontSize: event.currentTarget["fontSize"].value,
+            x:parseInt(event.currentTarget["x"].value),
+            y: parseInt(event.currentTarget["y"].value),
+            fontSize: parseInt(event.currentTarget["fontSize"].value),
             fontWeight: event.currentTarget["fontWeight"].value,
             color: event.currentTarget["color"].value,
             underline: event.currentTarget["underline"].checked,
             italic: event.currentTarget["italic"].checked,
-            imageId: event.currentTarget["image"].value,
+            imageId:parseInt(event.currentTarget["image"].value),
             id: undefined,
           };
           props.onMemeChange(changedMeme);

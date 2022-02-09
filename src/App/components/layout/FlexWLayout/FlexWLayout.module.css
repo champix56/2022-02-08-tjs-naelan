@@ -1,1 +1,6 @@
-.FlexWLayout {}
+.FlexWLayout {
+    display: flex;
+}
+.FlexWLayout:first-child {
+    flex-grow: 1;
+}

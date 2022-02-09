@@ -18,8 +18,8 @@ export const initialMeme: I_meme = {
   color: "#0000FF",
 };
 export const images: Array<I_memeImage> = [
-  { id: 0, title: "futurama", h: 1315, w: 2160, href: '/img/futurama.png' },
-  { id: 1, title: "futurama", h: 1080, w: 1920, href: '/img/futurama2.png' },
+  { id: 0, title: "futurama all", h: 1315, w: 2160, href: '/img/futurama.png' },
+  { id: 1, title: "futurama solo", h: 1080, w: 1920, href: '/img/futurama2.png' },
 ];
 function App() {
   //etat propageable et moddifiable pour le meme en cours

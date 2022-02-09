@@ -30,12 +30,23 @@ export default class App extends React.Component<I_AppProps,I_AppState>{
   constructor(props:I_AppProps){
     super(props);
     //init de la seule vameur etat possible
-    this.state={meme:initialMeme,images:images}
+    this.state={meme:initialMeme,images:[]}
   }
-  //fonction obligatoir de rendu du cmp
+  componentDidMount(){
+      fetch('http://localhost:7956/images').then(f=>f.json()).then(o=>{
+        this.setState({images:o});
+      });
+  }
+  componentDidUpdate(oldValue:I_AppState){
+
+  }
+  componentWillUnmount(){
+
+  }
+  //fonction obligatoire de rendu du cmp
   render(){
     return  <div className="App">
-           {JSON.stringify(this.state.meme)}
+           {JSON.stringify(this.state)}
            <FlexWLayout>
              <MemeSvgViewer meme={this.state.meme} image={this.state.images.find((img)=>{return img.id===this.state.meme.imageId})} />
              <MemeForm meme={this.state.meme} images={images} onMemeChange={(meme:I_meme)=>{

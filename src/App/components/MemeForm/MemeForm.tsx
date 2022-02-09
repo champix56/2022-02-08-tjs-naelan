@@ -41,10 +41,11 @@ const MemeForm: FC<MemeFormProps> = (props) => {
         </label>
         <br />
         <select name="image" id="image">
-          <option defaultValue="1">futurama1.jpg</option>
-          <option defaultValue="2">futurama2.png</option>
-          <option defaultValue="3">futurama3.png</option>
-          <option defaultValue="4">gwenadu.jpg</option>
+          {
+            props.images.map((e:I_memeImage,pos:number)=>{
+              return <option value={e.id}>{e.title}</option>
+            })
+          }
         </select>
         <hr />
         <label htmlFor="text">

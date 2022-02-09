@@ -20,22 +20,48 @@ export const initialMeme: I_meme = {
 export const images: Array<I_memeImage> = [
   { id: 0, title: "futurama all", h: 1315, w: 2160, href: '/img/futurama.png' },
   { id: 1, title: "futurama solo", h: 1080, w: 1920, href: '/img/futurama2.png' },
-];
-function App() {
-  //etat propageable et moddifiable pour le meme en cours
-  //etat initial de cette etat -> initialMeme
-  const [meme, setmeme] = useState(initialMeme);
-  return (
-    <div className="App">
-      {JSON.stringify(meme)}
-      <FlexWLayout>
-        <MemeSvgViewer meme={meme} image={images[1]} />
-        <MemeForm meme={meme} images={images} onMemeChange={(meme:I_meme)=>{
-          setmeme(meme);
-        }}/>
-      </FlexWLayout>
-    </div>
-  );
+ ];
+interface I_AppProps{}
+interface I_AppState{
+  meme:I_meme;
+  images:Array<I_memeImage>;
 }
+export default class App extends React.Component<I_AppProps,I_AppState>{
+  constructor(props:I_AppProps){
+    super(props);
+    //init de la seule vameur etat possible
+    this.state={meme:initialMeme,images:images}
+  }
+  //fonction obligatoir de rendu du cmp
+  render(){
+    return  <div className="App">
+           {JSON.stringify(this.state.meme)}
+           <FlexWLayout>
+             <MemeSvgViewer meme={this.state.meme} image={this.state.images.find((img)=>{return img.id===this.state.meme.imageId})} />
+             <MemeForm meme={this.state.meme} images={images} onMemeChange={(meme:I_meme)=>{
+               //modifficateur de contenu d'etat
+               this.setState({meme});
+             }}/>
+           </FlexWLayout>
+         </div>
+  }
+} 
 
-export default App;
+ // function App() {
+//   //etat propageable et moddifiable pour le meme en cours
+//   //etat initial de cette etat -> initialMeme
+//   const [meme, setmeme] = useState(initialMeme);
+//   return (
+//     <div className="App">
+//       {JSON.stringify(meme)}
+//       <FlexWLayout>
+//         <MemeSvgViewer meme={meme} image={images.find((img)=>{return img.id===meme.imageId})} />
+//         <MemeForm meme={meme} images={images} onMemeChange={(meme:I_meme)=>{
+//           setmeme(meme);
+//         }}/>
+//       </FlexWLayout>
+//     </div>
+//   );
+// }
+
+// export default App;

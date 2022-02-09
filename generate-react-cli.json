@@ -20,6 +20,16 @@
       "customTemplates":{
         "component":"grc_templates/ui/TemplateName.tsx"
       }
+    },
+    "layout":{
+      "path":"src/App/components/layout",
+      "withStyle": true,
+      "withTest": true,
+      "withStory": false,
+      "withLazy": false,
+      "customTemplates":{
+        "component":"grc_templates/layout/TemplateName.tsx"
+      }
     }
   }
 }

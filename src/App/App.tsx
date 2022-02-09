@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Button from "./components/Button/Button";
 import FlexWLayout from "./components/layout/FlexWLayout/FlexWLayout";
+import MemeForm from "./components/MemeForm/MemeForm";
 import MemeSvgViewer from "./components/ui/MemeSvgViewer/MemeSvgViewer";
 import { I_meme, I_memeImage } from "./interfaces/I_meme";
 export const meme: I_meme = {
@@ -25,9 +26,7 @@ function App() {
     <div className="App">
       <FlexWLayout>
         <MemeSvgViewer meme={meme} image={images[1]} />
-        <div >
-          Le formulaire
-        </div>
+        <MemeForm/>
       </FlexWLayout>
     </div>
   );

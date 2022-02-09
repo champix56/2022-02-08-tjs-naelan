@@ -14,6 +14,7 @@ const MemeSvgViewer: FC<MemeSvgViewerProps> = (props) => {
       data-testid="MemeSvgViewer"
       width="100%"
       height="100%"
+      viewBox={`0 0 ${props.image.w} ${props.image.h}`}
     >
       <image href={props.image.href} x="0" y="0" />
       <text

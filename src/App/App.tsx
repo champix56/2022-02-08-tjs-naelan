@@ -16,7 +16,7 @@ export const meme: I_meme = {
   color: "blue",
 };
 export const images: Array<I_memeImage> = [
-  { id: 0, title: "image0", h: 0, w: 0, href: "" },
+  { id: 0, title: "futurama", h: 1315, w: 2160, href: '/img/futurama.png' },
 ];
 function App() {
   return (

@@ -13,7 +13,7 @@ const MemeForm: FC<MemeFormProps> = (props) => {
   const getOptions=()=>{
     const arr:Array<any>=[];
     for (const img of props.images) {
-        arr.push(<option value={img.id}>{img.title}</option>)
+        arr.push(<option value={img.id}></option>)
     }
     return arr;
   }
@@ -49,7 +49,9 @@ const MemeForm: FC<MemeFormProps> = (props) => {
         <br />
         <select name="image" id="image">
           {
-            getOptions()
+            props.images.map((e: I_memeImage,pos:number)=>{
+              return <option value={e.id} key={'option-img'+pos}>{e.title}</option>
+            })
           }
         </select>
         <hr />

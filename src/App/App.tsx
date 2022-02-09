@@ -17,20 +17,18 @@ export const initialMeme: I_meme = {
   imageId: 0,
   color: "#0000FF",
 };
-export const images: Array<I_memeImage> = [
-  { id: 0, title: "futurama all", h: 1315, w: 2160, href: '/img/futurama.png' },
-  { id: 1, title: "futurama solo", h: 1080, w: 1920, href: '/img/futurama2.png' },
- ];
+
 interface I_AppProps{}
 interface I_AppState{
   meme:I_meme;
   images:Array<I_memeImage>;
+  memes: Array<I_meme>;
 }
 export default class App extends React.Component<I_AppProps,I_AppState>{
   constructor(props:I_AppProps){
     super(props);
-    //init de la seule vameur etat possible
-    this.state={meme:initialMeme,images:[]}
+    //init de la seule vaeur etat possible
+    this.state={meme:initialMeme,images:[],memes:[]}
   }
   componentDidMount(){
       fetch('http://localhost:7956/images').then(f=>f.json()).then((o:Array<I_memeImage>)=>{
@@ -49,7 +47,7 @@ export default class App extends React.Component<I_AppProps,I_AppState>{
            {JSON.stringify(this.state)}
            <FlexWLayout>
              <MemeSvgViewer meme={this.state.meme} image={this.state.images.find((img)=>{return img.id===this.state.meme.imageId})} />
-             <MemeForm meme={this.state.meme} images={images} onMemeChange={(meme:I_meme)=>{
+             <MemeForm meme={this.state.meme} images={this.state.images} onMemeChange={(meme:I_meme)=>{
                //modifficateur de contenu d'etat
                this.setState({meme});
              }}/>

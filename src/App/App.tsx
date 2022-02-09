@@ -27,9 +27,10 @@ function App() {
   const [meme, setmeme] = useState(initialMeme);
   return (
     <div className="App">
+      {JSON.stringify(meme)}
       <FlexWLayout>
         <MemeSvgViewer meme={meme} image={images[1]} />
-        <MemeForm meme={meme} images={images} onMemeChange={(meme)=>{
+        <MemeForm meme={meme} images={images} onMemeChange={(meme:I_meme)=>{
           setmeme(meme);
         }}/>
       </FlexWLayout>

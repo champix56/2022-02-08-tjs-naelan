@@ -31,7 +31,7 @@ const MemeForm: FC<MemeFormProps> = (props) => {
             color: event.currentTarget["color"].value,
             underline: event.currentTarget["underline"].checked,
             italic: event.currentTarget["italic"].checked,
-            imageId: 0,
+            imageId: event.currentTarget["image"].value,
             id: undefined,
           };
           props.onMemeChange(changedMeme);
@@ -47,7 +47,7 @@ const MemeForm: FC<MemeFormProps> = (props) => {
           <h2>Image</h2>
         </label>
         <br />
-        <select name="image" id="image">
+        <select name="image" id="image" defaultValue={props.meme.imageId}>
           {
             props.images.map((e: I_memeImage,pos:number)=>{
               return <option value={e.id} key={'option-img'+pos}>{e.title}</option>

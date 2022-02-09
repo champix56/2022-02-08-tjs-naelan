@@ -1,5 +1,6 @@
 .FlexWLayout {
     display: flex;
+    height:90vh;/*vh : view Height port; vw : view width port*/
 }
 .FlexWLayout:first-child {
     flex-grow: 1;

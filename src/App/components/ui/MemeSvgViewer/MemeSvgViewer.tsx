@@ -24,6 +24,7 @@ const MemeSvgViewer: FC<MemeSvgViewerProps> = (props) => {
         fontWeight={props.meme.fontWeight}
         textDecoration={props.meme.underline ? "underline" : "none"}
         fontStyle={props.meme.italic ? "italic" : "normal"}
+        fill={props.meme.color}
       >
         {props.meme.text}
       </text>

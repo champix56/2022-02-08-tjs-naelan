@@ -10,6 +10,13 @@ interface MemeFormProps {
 
 const MemeForm: FC<MemeFormProps> = (props) => {
   // const [state, setstate] = useState(props.meme)
+  const getOptions=()=>{
+    const arr:Array<any>=[];
+    for (const img of props.images) {
+        arr.push(<option value={img.id}>{img.title}</option>)
+    }
+    return arr;
+  }
   return (
     <div className={styles.MemeForm} data-testid="MemeForm">
       <form
@@ -42,9 +49,7 @@ const MemeForm: FC<MemeFormProps> = (props) => {
         <br />
         <select name="image" id="image">
           {
-            props.images.map((e: I_memeImage,pos:number)=>{
-              return <option value={e.id} key={'option-img'+pos}>{e.title}</option>
-            })
+            getOptions()
           }
         </select>
         <hr />

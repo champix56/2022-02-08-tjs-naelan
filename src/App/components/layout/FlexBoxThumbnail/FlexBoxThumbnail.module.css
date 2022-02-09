@@ -1,0 +1,9 @@
+.FlexBoxThumbnail {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 90vh;
+}
+.FlexBoxThumbnail > *{
+    max-width: 30vw;
+}

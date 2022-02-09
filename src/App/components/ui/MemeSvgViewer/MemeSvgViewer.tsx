@@ -4,7 +4,7 @@ import styles from "./MemeSvgViewer.module.css";
 
 interface MemeSvgViewerProps {
   meme: I_meme;
-  image: I_memeImage;
+  image: I_memeImage|undefined;
 }
 
 const MemeSvgViewer: FC<MemeSvgViewerProps> = (props) => {
@@ -14,9 +14,9 @@ const MemeSvgViewer: FC<MemeSvgViewerProps> = (props) => {
       data-testid="MemeSvgViewer"
       width="100%"
       height="100%"
-      viewBox={`0 0 ${props.image.w} ${props.image.h}`}
+      viewBox={`0 0 ${props.image?props.image.w:'1000'} ${props.image?props.image.h:'1000'}`}
     >
-      <image href={props.image.href} x="0" y="0" />
+     {props.image&& <image href={props.image.href} x="0" y="0" />}
       <text
         x={props.meme.x}
         y={props.meme.y}

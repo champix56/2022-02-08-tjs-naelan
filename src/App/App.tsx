@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Button from "./components/Button/Button";
+import FlexBoxThumbnail from "./components/layout/FlexBoxThumbnail/FlexBoxThumbnail";
 import FlexWLayout from "./components/layout/FlexWLayout/FlexWLayout";
 import MemeForm from "./components/MemeForm/MemeForm";
 import MemeSvgViewer from "./components/ui/MemeSvgViewer/MemeSvgViewer";
@@ -45,6 +46,12 @@ export default class App extends React.Component<I_AppProps,I_AppState>{
   render(){
     return  <div className="App">
            {JSON.stringify(this.state)}
+           <FlexBoxThumbnail>
+             {
+             this.state.memes.map((e,pos)=><MemeSvgViewer key={'meme-'+pos} meme={e} image={
+               this.state.images.find(ee=>ee.id===e.imageId)
+               }/>)}
+           </FlexBoxThumbnail>
            <FlexWLayout>
              <MemeSvgViewer meme={this.state.meme} image={this.state.images.find((img)=>{return img.id===this.state.meme.imageId})} />
              <MemeForm meme={this.state.meme} images={this.state.images} onMemeChange={(meme:I_meme)=>{

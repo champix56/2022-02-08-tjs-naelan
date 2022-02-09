@@ -32,16 +32,21 @@ export default class App extends React.Component<I_AppProps, I_AppState> {
     this.state = { meme: initialMeme, images: [], memes: [] };
   }
   componentDidMount() {
-    fetch("http://localhost:7956/images")
+   const prImg= fetch("http://localhost:7956/images")
       .then((f) => f.json())
-      .then((o: Array<I_memeImage>) => {
-        this.setState({ images: o });
-      });
+      
+    const prMemes=fetch("http://localhost:7956/memes")
+      .then((f) => f.json())
+      
+      Promise.all([prImg,prMemes]).then(tableauxDeResponses=>{
+        this.setState({images:tableauxDeResponses[0],memes:tableauxDeResponses[1]})
+      })
   }
   componentDidUpdate(oldValue: I_AppState) {}
   componentWillUnmount() {}
   //fonction obligatoire de rendu du cmp
   render() {
+    console.log('rendu de app')
     return (
       <div className="App">
         {JSON.stringify(this.state)}

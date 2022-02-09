@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Button from "./components/Button/Button";
 import FlexWLayout from "./components/layout/FlexWLayout/FlexWLayout";
@@ -33,7 +33,7 @@ export default class App extends React.Component<I_AppProps,I_AppState>{
     this.state={meme:initialMeme,images:[]}
   }
   componentDidMount(){
-      fetch('http://localhost:7956/images').then(f=>f.json()).then(o=>{
+      fetch('http://localhost:7956/images').then(f=>f.json()).then((o:Array<I_memeImage>)=>{
         this.setState({images:o});
       });
   }
@@ -58,21 +58,29 @@ export default class App extends React.Component<I_AppProps,I_AppState>{
   }
 } 
 
- // function App() {
-//   //etat propageable et moddifiable pour le meme en cours
-//   //etat initial de cette etat -> initialMeme
-//   const [meme, setmeme] = useState(initialMeme);
-//   return (
-//     <div className="App">
-//       {JSON.stringify(meme)}
-//       <FlexWLayout>
-//         <MemeSvgViewer meme={meme} image={images.find((img)=>{return img.id===meme.imageId})} />
-//         <MemeForm meme={meme} images={images} onMemeChange={(meme:I_meme)=>{
-//           setmeme(meme);
-//         }}/>
-//       </FlexWLayout>
-//     </div>
-//   );
-// }
+ function AppF() {
+  //etat propageable et moddifiable pour le meme en cours
+  //etat initial de cette etat -> initialMeme
+  const [meme, setmeme] = useState(initialMeme);
+  const initialImages:Array<I_memeImage>=[];
+  const [images, setimages] = useState(initialImages);
+  //component did mount uniquement car dependances vide
+  useEffect(() => {
+    fetch('http://localhost:7956/images').then(f=>f.json()).then((o:Array<I_memeImage>)=>{
+      setimages(o);
+    }); 
+  }, [])
+  return (
+    <div className="App">
+      {JSON.stringify(meme)}
+      <FlexWLayout>
+        <MemeSvgViewer meme={meme} image={images.find((img)=>{return img.id===meme.imageId})} />
+        <MemeForm meme={meme} images={images} onMemeChange={(meme:I_meme)=>{
+          setmeme(meme);
+        }}/>
+      </FlexWLayout>
+    </div>
+  );
+}
 
-// export default App;
+export const AppByFunc = AppF;

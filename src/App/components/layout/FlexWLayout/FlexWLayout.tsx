@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import styles from './FlexWLayout.module.css';
 
 interface FlexWLayoutProps {
-  children:string|Array<any>
+  children:string|Array<any>|ReactNode;
 }
 
 const FlexWLayout: FC<FlexWLayoutProps> = (props) => {

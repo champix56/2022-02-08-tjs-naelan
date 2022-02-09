@@ -5,7 +5,7 @@ import FlexWLayout from './FlexWLayout';
 
 describe('<FlexWLayout />', () => {
   test('it should mount', () => {
-    render(<FlexWLayout />);
+    render(<FlexWLayout >Un content</FlexWLayout>);
     
     const flexWLayout = screen.getByTestId('FlexWLayout');
 

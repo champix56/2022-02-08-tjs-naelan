@@ -9,9 +9,12 @@ interface MemeSvgViewerProps {
 
 const MemeSvgViewer: FC<MemeSvgViewerProps> = (props) => {
   return(
-  <div className={styles.MemeSvgViewer} data-testid="MemeSvgViewer">
-    MemeSvgViewer Component
-  </div>
+  <svg className={styles.MemeSvgViewer} data-testid="MemeSvgViewer" width="100%" height="100%">
+    <image href={props.image.href} x="0" y="0"/>
+    <text x={props.meme.x} y={props.meme.y} fontSize={props.meme.fontSize} fontWeight={props.meme.fontWeight} textDecoration={props.meme.underline?'underline':'none'} fontStyle={props.meme.italic?'italic':'normal'}>
+        {props.meme.text}
+    </text>
+  </svg>
 );}
 MemeSvgViewer.defaultProps={};
 export default MemeSvgViewer;

@@ -17,11 +17,12 @@ export const meme: I_meme = {
 };
 export const images: Array<I_memeImage> = [
   { id: 0, title: "futurama", h: 1315, w: 2160, href: '/img/futurama.png' },
+  { id: 1, title: "futurama", h: 1080, w: 1920, href: '/img/futurama2.png' },
 ];
 function App() {
   return (
     <div className="App">
-      <MemeSvgViewer meme={meme} image={images[0]} />
+      <MemeSvgViewer meme={meme} image={images[1]} />
     </div>
   );
 }

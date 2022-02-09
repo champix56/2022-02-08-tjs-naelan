@@ -19,70 +19,93 @@ export const initialMeme: I_meme = {
   color: "#0000FF",
 };
 
-interface I_AppProps{}
-interface I_AppState{
-  meme:I_meme;
-  images:Array<I_memeImage>;
+interface I_AppProps {}
+interface I_AppState {
+  meme: I_meme;
+  images: Array<I_memeImage>;
   memes: Array<I_meme>;
 }
-export default class App extends React.Component<I_AppProps,I_AppState>{
-  constructor(props:I_AppProps){
+export default class App extends React.Component<I_AppProps, I_AppState> {
+  constructor(props: I_AppProps) {
     super(props);
     //init de la seule vaeur etat possible
-    this.state={meme:initialMeme,images:[],memes:[]}
+    this.state = { meme: initialMeme, images: [], memes: [] };
   }
-  componentDidMount(){
-      fetch('http://localhost:7956/images').then(f=>f.json()).then((o:Array<I_memeImage>)=>{
-        this.setState({images:o});
+  componentDidMount() {
+    fetch("http://localhost:7956/images")
+      .then((f) => f.json())
+      .then((o: Array<I_memeImage>) => {
+        this.setState({ images: o });
       });
   }
-  componentDidUpdate(oldValue:I_AppState){
-
-  }
-  componentWillUnmount(){
-
-  }
+  componentDidUpdate(oldValue: I_AppState) {}
+  componentWillUnmount() {}
   //fonction obligatoire de rendu du cmp
-  render(){
-    return  <div className="App">
-           {JSON.stringify(this.state)}
-           <FlexBoxThumbnail>
-             {
-             this.state.memes.map((e,pos)=><MemeSvgViewer key={'meme-'+pos} meme={e} image={
-               this.state.images.find(ee=>ee.id===e.imageId)
-               }/>)}
-           </FlexBoxThumbnail>
-           <FlexWLayout>
-             <MemeSvgViewer meme={this.state.meme} image={this.state.images.find((img)=>{return img.id===this.state.meme.imageId})} />
-             <MemeForm meme={this.state.meme} images={this.state.images} onMemeChange={(meme:I_meme)=>{
-               //modifficateur de contenu d'etat
-               this.setState({meme});
-             }}/>
-           </FlexWLayout>
-         </div>
+  render() {
+    return (
+      <div className="App">
+        {JSON.stringify(this.state)}
+        <FlexBoxThumbnail>
+          {this.state.memes.map((e, pos) => (
+            <MemeSvgViewer
+              key={"meme-" + pos}
+              meme={e}
+              image={this.state.images.find((ee) => ee.id === e.imageId)}
+            />
+          ))}
+        </FlexBoxThumbnail>
+        <FlexWLayout>
+          <MemeSvgViewer
+            meme={this.state.meme}
+            image={this.state.images.find((img) => {
+              return img.id === this.state.meme.imageId;
+            })}
+          />
+          <MemeForm
+            meme={this.state.meme}
+            images={this.state.images}
+            onMemeChange={(meme: I_meme) => {
+              //modifficateur de contenu d'etat
+              this.setState({ meme });
+            }}
+          />
+        </FlexWLayout>
+      </div>
+    );
   }
-} 
+}
 
- function AppF() {
+function AppF() {
   //etat propageable et moddifiable pour le meme en cours
   //etat initial de cette etat -> initialMeme
   const [meme, setmeme] = useState(initialMeme);
-  const initialImages:Array<I_memeImage>=[];
+  const initialImages: Array<I_memeImage> = [];
   const [images, setimages] = useState(initialImages);
   //component did mount uniquement car dependances vide
   useEffect(() => {
-    fetch('http://localhost:7956/images').then(f=>f.json()).then((o:Array<I_memeImage>)=>{
-      setimages(o);
-    }); 
-  }, [])
+    fetch("http://localhost:7956/images")
+      .then((f) => f.json())
+      .then((o: Array<I_memeImage>) => {
+        setimages(o);
+      });
+  }, []);
   return (
     <div className="App">
       {JSON.stringify(meme)}
       <FlexWLayout>
-        <MemeSvgViewer meme={meme} image={images.find((img)=>{return img.id===meme.imageId})} />
-        <MemeForm meme={meme} images={images} onMemeChange={(meme:I_meme)=>{
-          setmeme(meme);
-        }}/>
+        <MemeSvgViewer
+          meme={meme}
+          image={images.find((img) => {
+            return img.id === meme.imageId;
+          })}
+        />
+        <MemeForm
+          meme={meme}
+          images={images}
+          onMemeChange={(meme: I_meme) => {
+            setmeme(meme);
+          }}
+        />
       </FlexWLayout>
     </div>
   );

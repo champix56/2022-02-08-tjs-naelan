@@ -15,7 +15,7 @@ export const initialMeme: I_meme = {
   italic: true,
   underline: true,
   imageId: 0,
-  color: "white",
+  color: "#0000FF",
 };
 export const images: Array<I_memeImage> = [
   { id: 0, title: "futurama", h: 1315, w: 2160, href: '/img/futurama.png' },

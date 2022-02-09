@@ -28,7 +28,8 @@
       "withStory": false,
       "withLazy": false,
       "customTemplates":{
-        "component":"grc_templates/layout/TemplateName.tsx"
+        "component":"grc_templates/layout/TemplateName.tsx",
+        "test":"grc_templates/layout/TemplateName.test.tsx"
       }
     }
   }

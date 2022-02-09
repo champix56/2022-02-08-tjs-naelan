@@ -29,7 +29,9 @@ function App() {
     <div className="App">
       <FlexWLayout>
         <MemeSvgViewer meme={meme} image={images[1]} />
-        <MemeForm meme={meme} images={images}/>
+        <MemeForm meme={meme} images={images} onMemeChange={(meme)=>{
+          setmeme(meme);
+        }}/>
       </FlexWLayout>
     </div>
   );

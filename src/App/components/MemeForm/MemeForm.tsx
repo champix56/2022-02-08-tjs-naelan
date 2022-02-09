@@ -1,16 +1,21 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
+import { I_meme, I_memeImage } from "../../interfaces/I_meme";
 import styles from "./MemeForm.module.css";
 
-interface MemeFormProps {}
+interface MemeFormProps {
+  meme: I_meme;
+  images: Array<I_memeImage>;
+}
 
-const MemeForm: FC<MemeFormProps> = () => (
-  <div className={styles.MemeForm} data-testid="MemeForm">
+const MemeForm: FC<MemeFormProps> = (props) => {
+ // const [state, setstate] = useState(props.meme)
+  return <div className={styles.MemeForm} data-testid="MemeForm">
     <form>
       <label htmlFor="titre">
         <h1>Titre</h1>
       </label>
       <br />
-      <input name="titre" id="titre" value="React is easy" />
+      <input name="titre" id="titre" value={props.meme.title} />
       <hr />
       <label htmlFor="image">
         <h2>Image</h2>
@@ -27,7 +32,7 @@ const MemeForm: FC<MemeFormProps> = () => (
         <h2>texte</h2>
       </label>
       <br />
-      <input name="text" id="text" type="text" value="Le js m'a tué" />
+      <input name="text" id="text" type="text" value={props.meme.text} />
       <br />
       <label htmlFor="x">
         <h2 style={{ display: "inline" }}>x :</h2>
@@ -37,7 +42,7 @@ const MemeForm: FC<MemeFormProps> = () => (
         name="x"
         id="x"
         type="number"
-        value="121"
+        value={props.meme.x}
       />
       <label htmlFor="y">
         <h2 style={{ display: "inline" }}>y :</h2>
@@ -47,7 +52,7 @@ const MemeForm: FC<MemeFormProps> = () => (
         name="y"
         id="y"
         type="number"
-        value="65"
+        value={props.meme.y}
       />
       <hr />
       <br />
@@ -55,7 +60,7 @@ const MemeForm: FC<MemeFormProps> = () => (
       <label htmlFor="color">
         <h2 style={{ display: "inline" }}>color :</h2>
       </label>
-      <input name="color" id="color" type="color" value="#FFFFFF" />
+      <input name="color" id="color" type="color" value={props.meme.color} />
       <br />
       <label htmlFor="fontSize">
         <h2 style={{ display: "inline" }}>font-size :</h2>
@@ -66,7 +71,7 @@ const MemeForm: FC<MemeFormProps> = () => (
         id="fontSize"
         type="number"
         min="0"
-        value="73"
+        value={props.meme.fontSize}
       />
       px
       <br />
@@ -81,10 +86,10 @@ const MemeForm: FC<MemeFormProps> = () => (
         min="100"
         step="100"
         max="900"
-        value="900"
+        value={props.meme.fontWeight}
       />
       <br />
-      <input name="underine" id="underline" type="checkbox" />
+      <input name="underline" id="underline" type="checkbox" checked={props.meme.underline} />
       &nbsp;
       <label htmlFor="underline">
         <h2 style={{ display: "inline" }}>underline</h2>
@@ -94,36 +99,11 @@ const MemeForm: FC<MemeFormProps> = () => (
         <h2 style={{ display: "inline" }}>italic</h2>
       </label>
       &nbsp;
-      <input name="italic" id="italic" type="checkbox" />
+      <input name="italic" id="italic" type="checkbox" checked={props.meme.italic} />
       <hr />
       <br />
-      <label htmlFor="frameSizeX">
-        <h2 style={{ display: "inline" }}>frame size X :</h2>
-      </label>
-      <input
-        className={styles.smallNumber}
-        name="frameSizeX"
-        id="frameSizeX"
-        type="number"
-        min="0"
-        value="0"
-      />
-      px{" "}
-      <label htmlFor="frameSizeY">
-        <h2 style={{ display: "inline" }}>frame size y :</h2>
-      </label>
-      <input
-        className={styles.smallNumber}
-        name="frameSizeY"
-        id="frameSizeY"
-        type="number"
-        min="0"
-        value="0"
-      />
-      px
-      <br />
+      
     </form>
-  </div>
-);
-
+  </div>;
+};
 export default MemeForm;

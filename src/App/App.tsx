@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Button from "./components/Button/Button";
 import FlexWLayout from "./components/layout/FlexWLayout/FlexWLayout";
 import MemeForm from "./components/MemeForm/MemeForm";
 import MemeSvgViewer from "./components/ui/MemeSvgViewer/MemeSvgViewer";
 import { I_meme, I_memeImage } from "./interfaces/I_meme";
-export const meme: I_meme = {
+export const initialMeme: I_meme = {
   title: "1er meme",
   text: "Mon equipe de dev js",
   x: 450,
@@ -22,11 +22,14 @@ export const images: Array<I_memeImage> = [
   { id: 1, title: "futurama", h: 1080, w: 1920, href: '/img/futurama2.png' },
 ];
 function App() {
+  //etat propageable et moddifiable pour le meme en cours
+  //etat initial de cette etat -> initialMeme
+  const [meme, setmeme] = useState(initialMeme);
   return (
     <div className="App">
       <FlexWLayout>
         <MemeSvgViewer meme={meme} image={images[1]} />
-        <MemeForm/>
+        <MemeForm meme={meme} images={images}/>
       </FlexWLayout>
     </div>
   );

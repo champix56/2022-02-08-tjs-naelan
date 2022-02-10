@@ -4,6 +4,7 @@ import FlexWLayout from "./components/layout/FlexWLayout/FlexWLayout";
 import MemeForm, { MemeFormWithStore } from "./components/MemeForm/MemeForm";
 import { ConnectedMemeThumbnail } from "./components/MemeThumbnail/MemeThumbnail";
 import MemeSvgViewer, { MemeSvgViewerWithStore } from "./components/ui/MemeSvgViewer/MemeSvgViewer";
+import NavBar from "./components/ui/NavBar/NavBar";
 import { I_meme, I_memeImage } from "./interfaces/I_meme";
 
 export const initialMeme: I_meme = {
@@ -27,6 +28,7 @@ export default class App extends React.Component<I_AppProps, I_AppState> {
     return (
       <>
       <div className="App">
+        <NavBar/>
         <ConnectedMemeThumbnail/>
         <FlexWLayout>
           <MemeSvgViewerWithStore/>

@@ -1,3 +1,6 @@
+import {createStore} from 'redux';
+
+
 const initialState = {
   images: [],
   memes: [],
@@ -19,9 +22,15 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
-let state=reducer(undefined,{type:'INIT'});
-console.log(state);
-state=reducer(state,{type:'INIT_MEMES_LIST',values:[{id:0},{id:1}]});
-console.log(state);
-state=reducer(state,{type:'ADD_MEME',value:{id:2}});
-console.log(state);
+// let state=reducer(undefined,{type:'INIT'});
+// console.log(state);
+// state=reducer(state,{type:'INIT_MEMES_LIST',values:[{id:0},{id:1}]});
+// console.log(state);
+// state=reducer(state,{type:'ADD_MEME',value:{id:2}});
+// console.log(state);
+const store=createStore(reducer);
+console.log(store.getState());
+store.dispatch({type:'INIT_MEMES_LIST',values:[{id:0},{id:1}]})
+console.log(store.getState());
+store.dispatch({type:'ADD_MEME',value:{id:2}});
+console.log(store.getState());

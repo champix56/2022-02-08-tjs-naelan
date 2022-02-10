@@ -53,7 +53,7 @@ export const MemeSvgViewerWithStore=connect(mapStateToProps, mapDispatchToProps)
 function mapStateToPropsOnlyImage(storeState:any,ownProps:any){
   return {
     ...ownProps,
-    image:storeState.ressources.images.find((img:I_memeImage)=>img.id===ownProps.imageId)
+    image:storeState.ressources.images.find((img:I_memeImage)=>img.id===ownProps.meme.imageId)
   }
 }
 //export avec connexion partiel: le meme a 

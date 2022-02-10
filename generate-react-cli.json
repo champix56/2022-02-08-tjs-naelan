@@ -31,6 +31,16 @@
         "component":"grc_templates/layout/TemplateName.tsx",
         "test":"grc_templates/layout/TemplateName.test.tsx"
       }
-    }
+    },
+      "connectedCmp":{
+        "path":"src/App/components",
+        "withStyle": true,
+        "withTest": true,
+        "withStory": false,
+        "withLazy": false,
+        "customTemplates":{
+          "component":"grc_templates/connectedFunctionComponent/TemplateName.tsx"
+        } 
+      }
   }
 }

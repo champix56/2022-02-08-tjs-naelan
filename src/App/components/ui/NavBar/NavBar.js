@@ -18,17 +18,17 @@ const NavBar = (props) => {
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          <LinkContainer to="/">Meme creator</LinkContainer>
+          <LinkContainer to="/"><div className="navbar-brand">Meme creator</div></LinkContainer>
           {/* <a className="navbar-brand" href="#">Meme creator</a> */}
 
         </div>
         <div className="collapse navbar-collapse navbar-ex1-collapse">
           <ul className="nav navbar-nav">
             <li className="active">
-              <a href="#">Thumbnail</a>
+              <LinkContainer to="/thumbnail"><div>Thumbnail</div></LinkContainer>
             </li>
             <li>
-              <a href="#">New</a>
+              <LinkContainer to="/editor"><div>New</div></LinkContainer>
             </li>
           </ul>
         </div>

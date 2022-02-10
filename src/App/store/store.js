@@ -28,7 +28,7 @@ const reducer = (state = initialState, action) => {
 // console.log(state);
 // state=reducer(state,{type:'ADD_MEME',value:{id:2}});
 // console.log(state);
-const store=createStore(reducer);
+export const store=createStore(reducer);
 console.log(store.getState());
 store.dispatch({type:'INIT_MEMES_LIST',values:[{id:0},{id:1}]})
 console.log(store.getState());

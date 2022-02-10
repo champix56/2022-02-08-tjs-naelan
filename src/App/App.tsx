@@ -3,7 +3,7 @@ import "./App.css";
 import FlexBoxThumbnail from "./components/layout/FlexBoxThumbnail/FlexBoxThumbnail";
 import FlexWLayout from "./components/layout/FlexWLayout/FlexWLayout";
 import MemeForm from "./components/MemeForm/MemeForm";
-import MemeSvgViewer from "./components/ui/MemeSvgViewer/MemeSvgViewer";
+import MemeSvgViewer, { MemeSvgViewerWithStore } from "./components/ui/MemeSvgViewer/MemeSvgViewer";
 import { I_meme, I_memeImage } from "./interfaces/I_meme";
 import {store} from './store/store';
 
@@ -21,39 +21,15 @@ export const initialMeme: I_meme = {
 };
 
 interface I_AppProps {}
-interface I_AppState {
-  meme: I_meme;
-  images: Array<I_memeImage>;
-  memes: Array<I_meme>;
-  forms:Array<any>;
-}
+interface I_AppState {}
 export default class App extends React.Component<I_AppProps, I_AppState> {
-  constructor(props: I_AppProps) {
-    super(props);
-    //init de la seule vaeur etat possible
-    this.state = { meme: initialMeme, images: [], memes: [],forms:[] };
-  }
-  componentDidMount() {
-    /*
-*/
-this.setState({...store.getState().ressources});
-store.subscribe(()=>{
-  this.setState({...store.getState().ressources})
-})
-   // store.dispatch({type:'ADD_MEME',value:{id:3,loaded:true}});
-    
-    
-  }
-  componentDidUpdate(oldValue: I_AppState) {}
-  componentWillUnmount() {}
-  //fonction obligatoire de rendu du cmp
   render() {
     console.log("rendu de app");
     return (
       <>
       <div className="App">
         {JSON.stringify(this.state)}
-        <FlexBoxThumbnail>
+        {/* <FlexBoxThumbnail>
           {this.state.memes.map((e, pos) => (
             <MemeSvgViewer
               key={"meme-" + pos}
@@ -61,14 +37,9 @@ store.subscribe(()=>{
               image={this.state.images.find((ee) => ee.id === e.imageId)}
             />
           ))}
-        </FlexBoxThumbnail>
+        </FlexBoxThumbnail> */}
         <FlexWLayout>
-          <MemeSvgViewer
-            meme={this.state.meme}
-            image={this.state.images.find((img) => {
-              return img.id === this.state.meme.imageId;
-            })}
-          />
+          <MemeSvgViewerWithStore/>
           <MemeForm
             meme={this.state.meme}
             images={this.state.images}

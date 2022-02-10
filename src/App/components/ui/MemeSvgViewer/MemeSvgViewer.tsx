@@ -1,5 +1,7 @@
 import React, { FC } from "react";
+import { connect, connectAdvanced } from "react-redux";
 import { I_meme, I_memeImage } from "../../../interfaces/I_meme";
+import { E_Curent_Actions } from "../../../store/store";
 import styles from "./MemeSvgViewer.module.css";
 
 interface MemeSvgViewerProps {
@@ -32,4 +34,25 @@ const MemeSvgViewer: FC<MemeSvgViewerProps> = (props) => {
   );
 };
 MemeSvgViewer.defaultProps = {};
+function mapStateToProps(storeState:any,ownProps:any){
+  return {
+    ...ownProps,
+    meme:{...storeState.current},
+    image:storeState.ressources.images.find((img:I_memeImage)=>img.id===storeState.current.imageId)
+  };
+}
+function mapDispatchToProps(dispatch:Function){
+  return {
+    
+  };
+}
 export default MemeSvgViewer;
+export const MemeSvgViewerWithStore=connect(mapStateToProps, mapDispatchToProps)(MemeSvgViewer);
+function mapStateToPropsOnlyImage(storeState:any,ownProps:any){
+  return {
+    ...ownProps,
+    image:storeState.ressources.images.find((img:I_memeImage)=>img.id===ownProps.imageId)
+  }
+}
+export const MemeSvgViewerWithStoreImage=connect(mapStateToPropsOnlyImage, mapDispatchToProps)(MemeSvgViewer);
+

@@ -1,9 +1,8 @@
-import React, { FC } from "react";
+import React from "react";
 import styles from "./NavBar.module.css";
+import {LinkContainer} from 'react-router-bootstrap'
 
-interface NavBarProps {}
-
-const NavBar: FC<NavBarProps> = (props) => {
+const NavBar = (props) => {
   return (
     <div className={styles.NavBar} data-testid="NavBar">
       <nav className="navbar navbar-inverse" role="navigation">
@@ -19,7 +18,9 @@ const NavBar: FC<NavBarProps> = (props) => {
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          <a className="navbar-brand" href="#">Meme creator</a>
+          <LinkContainer to="/">Meme creator</LinkContainer>
+          {/* <a className="navbar-brand" href="#">Meme creator</a> */}
+
         </div>
         <div className="collapse navbar-collapse navbar-ex1-collapse">
           <ul className="nav navbar-nav">

@@ -1,5 +1,6 @@
 import React, { FC, FormEvent } from "react";
 import { connect } from "react-redux";
+import { useParams, withRouter } from "react-router-dom";
 import { I_meme, I_memeImage } from "../../interfaces/I_meme";
 import { E_Curent_Actions, store } from "../../store/store";
 import Button from "../Button/Button";
@@ -167,4 +168,5 @@ function mapDispatchToProps(dispatch:Function){
     save:()=>dispatch({type:E_Curent_Actions.SAVE}),
   }
 }
-export const MemeFormWithStore=connect(mapStateToProps,mapDispatchToProps)(MemeForm);
+const ConnectMemeForm=connect(mapStateToProps,mapDispatchToProps)(MemeForm);
+export const MemeFormWithStore=withRouter(ConnectMemeForm);

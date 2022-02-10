@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import FlexBoxThumbnail from "./components/layout/FlexBoxThumbnail/FlexBoxThumbnail";
 import FlexWLayout from "./components/layout/FlexWLayout/FlexWLayout";
 import MemeForm, { MemeFormWithStore } from "./components/MemeForm/MemeForm";
+import { ConnectedMemeThumbnail } from "./components/MemeThumbnail/MemeThumbnail";
 import MemeSvgViewer, { MemeSvgViewerWithStore } from "./components/ui/MemeSvgViewer/MemeSvgViewer";
 import { I_meme, I_memeImage } from "./interfaces/I_meme";
-import {store} from './store/store';
 
 export const initialMeme: I_meme = {
   title: "1er meme",
@@ -28,16 +27,7 @@ export default class App extends React.Component<I_AppProps, I_AppState> {
     return (
       <>
       <div className="App">
-        {JSON.stringify(this.state)}
-        {/* <FlexBoxThumbnail>
-          {this.state.memes.map((e, pos) => (
-            <MemeSvgViewer
-              key={"meme-" + pos}
-              meme={e}
-              image={this.state.images.find((ee) => ee.id === e.imageId)}
-            />
-          ))}
-        </FlexBoxThumbnail> */}
+        <ConnectedMemeThumbnail/>
         <FlexWLayout>
           <MemeSvgViewerWithStore/>
           <MemeFormWithStore/>

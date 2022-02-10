@@ -34,20 +34,7 @@ export default class App extends React.Component<I_AppProps, I_AppState> {
     this.state = { meme: initialMeme, images: [], memes: [],forms:[] };
   }
   componentDidMount() {
-    /*const prImg = fetch("http://localhost:7956/images").then((f) => f.json());
-
-    const prMemes = fetch("http://localhost:7956/memes").then((f) => f.json());
-    
-    const prForms = fetch("http://localhost:7956/forms").then((f) => f.json());
-
-    Promise.all([prImg, prMemes,prForms]).then((tableauxDeResponses) => {
-      this.setState({
-        images: tableauxDeResponses[0],
-        memes: tableauxDeResponses[1],
-        //gestion dyn du form supprimé pour l'exemple
-        forms: tableauxDeResponses[2],
-      });
-    });
+    /*
 */
 this.setState({...store.getState().ressources});
 store.subscribe(()=>{

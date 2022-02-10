@@ -12,7 +12,7 @@ interface ITemplateNameProps{};
  * @returns component render
  */
 export const TemplateName:React.FC<ITemplateNameProps>= (props) => {
-  return <div className={styles.TemplateName}></div>;
+  return <div className={styles.TemplateName}>templateName component</div>;
 };
 
 const mapStateToProps = (storeState:any,ownProps:any) => {

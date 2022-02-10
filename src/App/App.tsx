@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import FlexBoxThumbnail from "./components/layout/FlexBoxThumbnail/FlexBoxThumbnail";
 import FlexWLayout from "./components/layout/FlexWLayout/FlexWLayout";
-import MemeForm from "./components/MemeForm/MemeForm";
+import MemeForm, { MemeFormWithStore } from "./components/MemeForm/MemeForm";
 import MemeSvgViewer, { MemeSvgViewerWithStore } from "./components/ui/MemeSvgViewer/MemeSvgViewer";
 import { I_meme, I_memeImage } from "./interfaces/I_meme";
 import {store} from './store/store';
@@ -40,14 +40,7 @@ export default class App extends React.Component<I_AppProps, I_AppState> {
         </FlexBoxThumbnail> */}
         <FlexWLayout>
           <MemeSvgViewerWithStore/>
-          <MemeForm
-            meme={this.state.meme}
-            images={this.state.images}
-            onMemeChange={(meme: I_meme) => {
-              //modifficateur de contenu d'etat
-              this.setState({ meme });
-            }}
-          />
+          <MemeFormWithStore/>
         </FlexWLayout>
       </div>
       </>

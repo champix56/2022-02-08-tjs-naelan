@@ -1,5 +1,7 @@
 import React, { FC, FormEvent } from "react";
+import { connect } from "react-redux";
 import { I_meme, I_memeImage } from "../../interfaces/I_meme";
+import { E_Curent_Actions } from "../../store/store";
 import styles from "./MemeForm.module.css";
 
 interface MemeFormProps {
@@ -144,3 +146,17 @@ const MemeForm: FC<MemeFormProps> = (props) => {
   );
 };
 export default MemeForm;
+
+function mapStateToProps(storeState:any,ownProps:any) {
+  return{
+    ...ownProps,
+    meme:storeState.current,
+    images:storeState.ressources.images
+  }
+}
+function mapDispatchToProps(dispatch:Function){
+  return {
+    onMemeChange:(meme:I_meme)=>dispatch({type:E_Curent_Actions.UPDATE_CURRENT,value:meme})
+  }
+}
+export const MemeFormWithStore=connect(mapStateToProps,mapDispatchToProps)(MemeForm);

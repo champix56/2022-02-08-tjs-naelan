@@ -41,6 +41,16 @@
         "customTemplates":{
           "component":"grc_templates/connectedFunctionComponent/TemplateName.tsx"
         } 
+      },
+      "store":{
+        "path":"src/App/store",
+        "withStyle": false,
+        "withTest": false,
+        "withStory": false,
+        "withLazy": false,
+        "customTemplates":{
+          "component":"grc_templates/store/TemplateName.js"
+        } 
       }
   }
 }

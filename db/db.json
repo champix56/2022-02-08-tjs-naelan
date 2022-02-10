@@ -29,5 +29,25 @@
       "w": 1920,
       "href": "/img/futurama2.png"
     }
+  ],
+  "forms": [
+    {
+      "id": 0,
+      "inputs": [
+        { "type": "text", "name": "title" },
+        { "type": "check", "name": "isNew" },
+        { "type": "textArea", "name": "content" },
+        { "type": "text", "name": "value" }
+      ]
+    },
+    {
+      "id": 1,
+      "inputs": [
+        { "type": "number", "name": "number" },
+        { "type": "date", "name": "date" },
+        { "type": "textArea", "name": "title" }
+      ]
+    }
+
   ]
 }

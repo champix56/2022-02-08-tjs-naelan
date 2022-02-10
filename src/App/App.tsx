@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Button from "./components/Button/Button";
+import DynForm from "./components/DynForm/DynForm";
 import FlexBoxThumbnail from "./components/layout/FlexBoxThumbnail/FlexBoxThumbnail";
 import FlexWLayout from "./components/layout/FlexWLayout/FlexWLayout";
 import MemeForm from "./components/MemeForm/MemeForm";
@@ -24,30 +25,41 @@ interface I_AppState {
   meme: I_meme;
   images: Array<I_memeImage>;
   memes: Array<I_meme>;
+  forms:Array<any>;
 }
 export default class App extends React.Component<I_AppProps, I_AppState> {
   constructor(props: I_AppProps) {
     super(props);
     //init de la seule vaeur etat possible
-    this.state = { meme: initialMeme, images: [], memes: [] };
+    this.state = { meme: initialMeme, images: [], memes: [],forms:[] };
   }
   componentDidMount() {
-   const prImg= fetch("http://localhost:7956/images")
-      .then((f) => f.json())
-      
-    const prMemes=fetch("http://localhost:7956/memes")
-      .then((f) => f.json())
-      
-      Promise.all([prImg,prMemes]).then(tableauxDeResponses=>{
-        this.setState({images:tableauxDeResponses[0],memes:tableauxDeResponses[1]})
-      })
+    const prImg = fetch("http://localhost:7956/images").then((f) => f.json());
+
+    const prMemes = fetch("http://localhost:7956/memes").then((f) => f.json());
+    
+    const prForms = fetch("http://localhost:7956/forms").then((f) => f.json());
+
+    Promise.all([prImg, prMemes,prForms]).then((tableauxDeResponses) => {
+      this.setState({
+        images: tableauxDeResponses[0],
+        memes: tableauxDeResponses[1],
+        forms: tableauxDeResponses[2],
+      });
+    });
   }
   componentDidUpdate(oldValue: I_AppState) {}
   componentWillUnmount() {}
   //fonction obligatoire de rendu du cmp
   render() {
-    console.log('rendu de app')
+    console.log("rendu de app");
     return (
+      <>
+      <div className="dynForm-app">
+        {this.state.forms.map(e=>{
+          return <><DynForm form={e} /><hr/></>
+        })}
+      </div>
       <div className="App">
         {JSON.stringify(this.state)}
         <FlexBoxThumbnail>
@@ -76,6 +88,7 @@ export default class App extends React.Component<I_AppProps, I_AppState> {
           />
         </FlexWLayout>
       </div>
+      </>
     );
   }
 }
@@ -95,24 +108,26 @@ function AppF() {
       });
   }, []);
   return (
-    <div className="App">
-      {JSON.stringify(meme)}
-      <FlexWLayout>
-        <MemeSvgViewer
-          meme={meme}
-          image={images.find((img) => {
-            return img.id === meme.imageId;
-          })}
-        />
-        <MemeForm
-          meme={meme}
-          images={images}
-          onMemeChange={(meme: I_meme) => {
-            setmeme(meme);
-          }}
-        />
-      </FlexWLayout>
-    </div>
+    <>
+      <div className="App">
+        {JSON.stringify(meme)}
+        <FlexWLayout>
+          <MemeSvgViewer
+            meme={meme}
+            image={images.find((img) => {
+              return img.id === meme.imageId;
+            })}
+          />
+          <MemeForm
+            meme={meme}
+            images={images}
+            onMemeChange={(meme: I_meme) => {
+              setmeme(meme);
+            }}
+          />
+        </FlexWLayout>
+      </div>
+    </>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, FormEventHandler, useState } from "react";
+import React, { FC, FormEvent } from "react";
 import { I_meme, I_memeImage } from "../../interfaces/I_meme";
 import styles from "./MemeForm.module.css";
 

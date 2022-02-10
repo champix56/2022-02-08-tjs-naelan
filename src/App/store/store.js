@@ -1,5 +1,4 @@
-import {combineReducers, createStore} from 'redux';
-
+import { combineReducers, createStore } from "redux";
 
 const initialState = {
   images: [],
@@ -9,50 +8,62 @@ const initialState = {
 /**
  * reducer de redux
  * @param {*} state etat avant modif
- * @param {*} action action a mettre en place 
+ * @param {*} action action a mettre en place
  * @returns new state val
  */
 const reducer = (state = initialState, action) => {
   console.log(action);
   switch (action.type) {
-    case 'INIT_LISTS':
-      return { ...state, memes: action.values[1],images:action.values[0]};
-      case 'FETCH_INITIAL_RESSOURCES':
-        const prImg = fetch("http://localhost:7956/images").then((f) => f.json());
-        const prMemes = fetch("http://localhost:7956/memes").then((f) => f.json());
-        
-        Promise.all([prImg, prMemes]).then((tableauxDeResponses) => {
-         store.dispatch({type:'INIT_LISTS',values:tableauxDeResponses});
-        });
+    case "INIT_LISTS":
+      return { ...state, memes: action.values[1], images: action.values[0] };
+    case "FETCH_INITIAL_RESSOURCES":
+      const prImg = fetch("http://localhost:7956/images").then((f) => f.json());
+      const prMemes = fetch("http://localhost:7956/memes").then((f) =>
+        f.json()
+      );
+
+      Promise.all([prImg, prMemes]).then((tableauxDeResponses) => {
+        store.dispatch({ type: "INIT_LISTS", values: tableauxDeResponses });
+      });
       return state;
-    case 'ADD_MEME':
-        return {...state,memes:[...state.memes,action.value]};
+    case "ADD_MEME":
+      return { ...state, memes: [...state.memes, action.value] };
     default:
       return state;
   }
 };
 
 const initialState_current = {
-    title: "",
-    text: "",
-    x: 0,
-    y: 0,
-    fontSize: 100,
-    fontWeight: "900",
-    italic: true,
-    underline: true,
-    imageId: 0,
-    color: "#FFFFFF",
-  };
-export const E_Curent_Actions=Object.freeze({
-    UPDATE_CURRENT:'UPDATE_CURRENT'
+  title: "",
+  text: "",
+  x: 0,
+  y: 0,
+  fontSize: 100,
+  fontWeight: "900",
+  italic: true,
+  underline: true,
+  imageId: 0,
+  color: "#FFFFFF",
+};
+export const E_Curent_Actions = Object.freeze({
+  UPDATE_CURRENT: "UPDATE_CURRENT",
+  SAVE: "SAVE",
 });
-const currentReducer=(state = initialState_current, action) => {
-   
+const currentReducer = (state = initialState_current, action) => {
   switch (action.type) {
     case E_Curent_Actions.UPDATE_CURRENT:
-      return { ...state, ...action.value};
-
+      return { ...state, ...action.value };
+    case E_Curent_Actions.SAVE:
+      fetch("http://localhost:7956/memes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body:JSON.stringify(state)
+      }).then(f=>f.json())
+      .then(o=>{
+          store.dispatch({type:'ADD_MEME',value:o});
+      })
+      return state;
+      case 'ADD_MEME':return initialState_current;
     default:
       return state;
   }
@@ -64,9 +75,13 @@ const currentReducer=(state = initialState_current, action) => {
 // console.log(state);
 // state=reducer(state,{type:'ADD_MEME',value:{id:2}});
 // console.log(state);
-const cbr=combineReducers({current: currentReducer, ressources:reducer});
-export const store=createStore(cbr);
-store.subscribe(()=>{
-    console.log(store.getState());
+const cbr = combineReducers({ current: currentReducer, ressources: reducer });
+//ajout du devtool redux
+export const store = createStore(
+  cbr,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+store.subscribe(() => {
+  console.log(store.getState());
 });
-store.dispatch({type:'FETCH_INITIAL_RESSOURCES'});
+store.dispatch({ type: "FETCH_INITIAL_RESSOURCES" });

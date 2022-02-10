@@ -5,6 +5,8 @@ import FlexWLayout from "./components/layout/FlexWLayout/FlexWLayout";
 import MemeForm from "./components/MemeForm/MemeForm";
 import MemeSvgViewer from "./components/ui/MemeSvgViewer/MemeSvgViewer";
 import { I_meme, I_memeImage } from "./interfaces/I_meme";
+import {store} from './store/store';
+
 export const initialMeme: I_meme = {
   title: "1er meme",
   text: "Mon equipe de dev js",
@@ -32,7 +34,7 @@ export default class App extends React.Component<I_AppProps, I_AppState> {
     this.state = { meme: initialMeme, images: [], memes: [],forms:[] };
   }
   componentDidMount() {
-    const prImg = fetch("http://localhost:7956/images").then((f) => f.json());
+    /*const prImg = fetch("http://localhost:7956/images").then((f) => f.json());
 
     const prMemes = fetch("http://localhost:7956/memes").then((f) => f.json());
     
@@ -46,6 +48,14 @@ export default class App extends React.Component<I_AppProps, I_AppState> {
         forms: tableauxDeResponses[2],
       });
     });
+*/
+this.setState({...store.getState().ressources});
+store.subscribe(()=>{
+  this.setState({...store.getState().ressources})
+})
+   // store.dispatch({type:'ADD_MEME',value:{id:3,loaded:true}});
+    
+    
   }
   componentDidUpdate(oldValue: I_AppState) {}
   componentWillUnmount() {}

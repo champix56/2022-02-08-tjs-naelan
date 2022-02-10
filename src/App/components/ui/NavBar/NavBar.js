@@ -25,10 +25,10 @@ const NavBar = (props) => {
         <div className="collapse navbar-collapse navbar-ex1-collapse">
           <ul className="nav navbar-nav">
             <li className="active">
-              <LinkContainer to="/thumbnail"><div>Thumbnail</div></LinkContainer>
+              <LinkContainer to="/thumbnail"><div className="navbar-brand">Thumbnail</div></LinkContainer>
             </li>
             <li>
-              <LinkContainer to="/editor"><div>New</div></LinkContainer>
+              <LinkContainer to="/editor"><div className="navbar-brand">New</div></LinkContainer>
             </li>
           </ul>
         </div>

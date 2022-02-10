@@ -5,6 +5,7 @@ const initialState = {
   images: [],
   memes: [],
 };
+
 /**
  * reducer de redux
  * @param {*} state etat avant modif
@@ -14,8 +15,16 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   console.log(action);
   switch (action.type) {
-    case 'INIT_MEMES_LIST':
-      return { ...state, memes: action.values};
+    case 'INIT_LISTS':
+      return { ...state, memes: action.values[1],images:action.values[0]};
+      case 'FETCH_INITIAL_RESSOURCES':
+        const prImg = fetch("http://localhost:7956/images").then((f) => f.json());
+        const prMemes = fetch("http://localhost:7956/memes").then((f) => f.json());
+        
+        Promise.all([prImg, prMemes]).then((tableauxDeResponses) => {
+         store.dispatch({type:'INIT_LISTS',values:tableauxDeResponses});
+        });
+      return state;
     case 'ADD_MEME':
         return {...state,memes:[...state.memes,action.value]};
     default:
@@ -39,7 +48,7 @@ export const E_Curent_Actions=Object.freeze({
     UPDATE_CURRENT:'UPDATE_CURRENT'
 });
 const currentReducer=(state = initialState_current, action) => {
-    console.log(action);
+   
   switch (action.type) {
     case E_Curent_Actions.UPDATE_CURRENT:
       return { ...state, ...action.value};
@@ -60,5 +69,4 @@ export const store=createStore(cbr);
 store.subscribe(()=>{
     console.log(store.getState());
 });
-store.dispatch({type:'INIT_MEMES_LIST',values:[{id:0},{id:1}]});
-store.dispatch({type:'ADD_MEME',value:{id:2}});
+store.dispatch({type:'FETCH_INITIAL_RESSOURCES'});

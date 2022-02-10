@@ -1,13 +1,15 @@
 import React, { FC, FormEvent } from "react";
 import { connect } from "react-redux";
 import { I_meme, I_memeImage } from "../../interfaces/I_meme";
-import { E_Curent_Actions } from "../../store/store";
+import { E_Curent_Actions, store } from "../../store/store";
+import Button from "../Button/Button";
 import styles from "./MemeForm.module.css";
 
 interface MemeFormProps {
   meme: I_meme;
   images: Array<I_memeImage>;
   onMemeChange: Function;
+  save:Function;
 }
 
 const MemeForm: FC<MemeFormProps> = (props) => {
@@ -37,6 +39,10 @@ const MemeForm: FC<MemeFormProps> = (props) => {
             id: undefined,
           };
           props.onMemeChange(changedMeme);
+        }}
+        onSubmit={(evt:FormEvent<HTMLFormElement>)=>{
+          evt.preventDefault();
+          props.save();
         }}
       >
         <label htmlFor="titre">
@@ -141,6 +147,7 @@ const MemeForm: FC<MemeFormProps> = (props) => {
         />
         <hr />
         <br />
+        <Button type="submit">Enregistrer<br/></Button>
       </form>
     </div>
   );
@@ -156,7 +163,8 @@ function mapStateToProps(storeState:any,ownProps:any) {
 }
 function mapDispatchToProps(dispatch:Function){
   return {
-    onMemeChange:(meme:I_meme)=>dispatch({type:E_Curent_Actions.UPDATE_CURRENT,value:meme})
+    onMemeChange:(meme:I_meme)=>dispatch({type:E_Curent_Actions.UPDATE_CURRENT,value:meme}),
+    save:()=>dispatch({type:E_Curent_Actions.SAVE}),
   }
 }
 export const MemeFormWithStore=connect(mapStateToProps,mapDispatchToProps)(MemeForm);

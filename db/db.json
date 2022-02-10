@@ -12,6 +12,19 @@
       "underline": true,
       "imageId": 0,
       "color": "#0000FF"
+    },
+    {
+      "title": "zertyu",
+      "text": "React ma freeze en 3 j",
+      "x": 50,
+      "y": 300,
+      "fontSize": 100,
+      "fontWeight": "900",
+      "italic": true,
+      "underline": true,
+      "imageId": 1,
+      "color": "#ffffff",
+      "id": 1
     }
   ],
   "images": [
@@ -34,20 +47,40 @@
     {
       "id": 0,
       "inputs": [
-        { "type": "text", "name": "title" },
-        { "type": "check", "name": "isNew" },
-        { "type": "textArea", "name": "content" },
-        { "type": "text", "name": "value" }
+        {
+          "type": "text",
+          "name": "title"
+        },
+        {
+          "type": "check",
+          "name": "isNew"
+        },
+        {
+          "type": "textArea",
+          "name": "content"
+        },
+        {
+          "type": "text",
+          "name": "value"
+        }
       ]
     },
     {
       "id": 1,
       "inputs": [
-        { "type": "number", "name": "number" },
-        { "type": "date", "name": "date" },
-        { "type": "textArea", "name": "title" }
+        {
+          "type": "number",
+          "name": "number"
+        },
+        {
+          "type": "date",
+          "name": "date"
+        },
+        {
+          "type": "textArea",
+          "name": "title"
+        }
       ]
     }
-
   ]
 }

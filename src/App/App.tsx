@@ -69,6 +69,7 @@ function AppF() {
             onMemeChange={(meme: I_meme) => {
               setmeme(meme);
             }}
+            save={()=>{}}
           />
         </FlexWLayout>
       </div>

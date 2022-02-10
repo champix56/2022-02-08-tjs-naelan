@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import Button from "./components/Button/Button";
-import DynForm from "./components/DynForm/DynForm";
 import FlexBoxThumbnail from "./components/layout/FlexBoxThumbnail/FlexBoxThumbnail";
 import FlexWLayout from "./components/layout/FlexWLayout/FlexWLayout";
 import MemeForm from "./components/MemeForm/MemeForm";
@@ -44,6 +42,7 @@ export default class App extends React.Component<I_AppProps, I_AppState> {
       this.setState({
         images: tableauxDeResponses[0],
         memes: tableauxDeResponses[1],
+        //gestion dyn du form supprimé pour l'exemple
         forms: tableauxDeResponses[2],
       });
     });
@@ -55,11 +54,6 @@ export default class App extends React.Component<I_AppProps, I_AppState> {
     console.log("rendu de app");
     return (
       <>
-      <div className="dynForm-app">
-        {this.state.forms.map(e=>{
-          return <><DynForm form={e} /><hr/></>
-        })}
-      </div>
       <div className="App">
         {JSON.stringify(this.state)}
         <FlexBoxThumbnail>

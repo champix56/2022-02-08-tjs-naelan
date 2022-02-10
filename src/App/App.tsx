@@ -33,13 +33,24 @@ export default class App extends React.Component<I_AppProps, I_AppState> {
         <div className="App">
           <NavBar />
           <Switch>
+            {/* 
+              disparition de exact dans la nouvelle version ... toutes routes sont exact
+              disparition de children dans la nouvelle version la props component permet de specifié 
+              L'ENFANT(pas les enfants) qui sera creer pour la route 
+            */}
             <Route path="/" exact>
                 <h1>Deguemer mat dans le generateur de memes</h1>
             </Route>
             <Route path="/Thumbnail">
               <ConnectedMemeThumbnail />
             </Route>
-            <Route path="/editor">
+            <Route path="/editor" exact>
+              <FlexWLayout>
+                <MemeSvgViewerWithStore />
+                <MemeFormWithStore />
+              </FlexWLayout>
+            </Route>
+            <Route path="/editor/:id">
               <FlexWLayout>
                 <MemeSvgViewerWithStore />
                 <MemeFormWithStore />

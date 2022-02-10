@@ -46,7 +46,9 @@ function mapDispatchToProps(dispatch:Function){
     
   };
 }
+//export avec les props provennant uniquement du parent
 export default MemeSvgViewer;
+//export avec connection au meme courrant du store et l'image de la liste d'images du store
 export const MemeSvgViewerWithStore=connect(mapStateToProps, mapDispatchToProps)(MemeSvgViewer);
 function mapStateToPropsOnlyImage(storeState:any,ownProps:any){
   return {
@@ -54,5 +56,7 @@ function mapStateToPropsOnlyImage(storeState:any,ownProps:any){
     image:storeState.ressources.images.find((img:I_memeImage)=>img.id===ownProps.imageId)
   }
 }
+//export avec connexion partiel: le meme a 
+//afficher provient du parent et l'image proviens de la liste d'images du parent
 export const MemeSvgViewerWithStoreImage=connect(mapStateToPropsOnlyImage, mapDispatchToProps)(MemeSvgViewer);
 

@@ -4,6 +4,7 @@ import { useParams, withRouter } from "react-router-dom";
 import { I_meme, I_memeImage } from "../../interfaces/I_meme";
 import { E_Curent_Actions, store } from "../../store/store";
 import Button from "../Button/Button";
+import SelectorEditor from "../SelectorEditor/SelectorEditor";
 import styles from "./MemeForm.module.css";
 
 interface MemeFormProps {
@@ -24,6 +25,7 @@ const MemeForm: FC<MemeFormProps> = (props) => {
   }
   return (
     <div className={styles.MemeForm} data-testid="MemeForm">
+      <SelectorEditor/>
       <form
         onChange={(event: FormEvent<HTMLFormElement>) => {
           const changedMeme: I_meme = {

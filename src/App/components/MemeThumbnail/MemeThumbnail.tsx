@@ -1,9 +1,9 @@
-import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
-import { I_meme, I_memeImage } from "../../interfaces/I_meme";
+import { Link } from "react-router-dom";
+import { I_meme } from "../../interfaces/I_meme";
 import FlexBoxThumbnail from "../layout/FlexBoxThumbnail/FlexBoxThumbnail";
-import MemeSvgViewer, { MemeSvgViewerWithStoreImage } from "../ui/MemeSvgViewer/MemeSvgViewer";
+import { MemeSvgViewerWithStoreImage } from "../ui/MemeSvgViewer/MemeSvgViewer";
 import styles from "./MemeThumbnail.module.css";
 /**
  *
@@ -21,10 +21,12 @@ export const MemeThumbnail: React.FC<IMemeThumbnailProps> = (props) => {
     <div className={styles.MemeThumbnail} data-testid="MemeThumbnail">
       <FlexBoxThumbnail>
         {props.memes.map((e, pos) => (
-          <MemeSvgViewerWithStoreImage
-            key={"meme-" + pos}
-            meme={e}
-          />
+          <Link to={'/editor/'+e.id}>
+            <MemeSvgViewerWithStoreImage
+              key={"meme-" + pos}
+              meme={e}
+            />
+          </Link>
         ))}
       </FlexBoxThumbnail>
     </div>

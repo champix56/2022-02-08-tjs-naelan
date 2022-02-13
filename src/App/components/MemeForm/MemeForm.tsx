@@ -150,7 +150,7 @@ const MemeForm: FC<MemeFormProps> = (props) => {
         />
         <hr />
         <br />
-        <Button type="submit">Enregistrer<br/></Button>
+        <Button type="submit">Enregistrer</Button>
       </form>
     </div>
   );

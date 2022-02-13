@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import FlexWLayout from "./components/layout/FlexWLayout/FlexWLayout";
+import { ConnectedMemePDFThumbnail } from "./components/layout/MemePDFThumbnail/MemePDFThumbnail";
 import MemeForm, { MemeFormWithStore } from "./components/MemeForm/MemeForm";
 import { ConnectedMemeThumbnail } from "./components/MemeThumbnail/MemeThumbnail";
 import MemeSvgViewer, {
@@ -40,6 +41,9 @@ export default class App extends React.Component<I_AppProps, I_AppState> {
             */}
             <Route path="/" exact>
                 <h1>Deguemer mat dans le generateur de memes</h1>
+            </Route>
+            <Route path="/thumbnailPDF">
+              <ConnectedMemePDFThumbnail />
             </Route>
             <Route path="/Thumbnail">
               <ConnectedMemeThumbnail />

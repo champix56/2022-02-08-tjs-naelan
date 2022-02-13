@@ -28,6 +28,9 @@ const NavBar = (props) => {
               <LinkContainer to="/thumbnail"><div className="navbar-brand">Thumbnail</div></LinkContainer>
             </li>
             <li>
+              <LinkContainer to="/thumbnailPDF"><div className="navbar-brand">Thumbnail PDF</div></LinkContainer>
+            </li>
+            <li>
               <LinkContainer to="/editor"><div className="navbar-brand">New</div></LinkContainer>
             </li>
           </ul>

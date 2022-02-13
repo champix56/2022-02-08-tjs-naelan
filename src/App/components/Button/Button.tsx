@@ -36,8 +36,6 @@ const Button: React.FC<I_PropsButton> = (props) => {
     >
       {/* execution du on click fournit par le parent par les props*/}
       {props.children}
-      <br/>
-      {isClicked.toString()}
       {/* affichage du text fournit par le parent par les props  */}
     </button>
   );

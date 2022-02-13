@@ -1,8 +1,8 @@
 import React, { FC, FormEvent } from "react";
 import { connect } from "react-redux";
-import { useParams, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { I_meme, I_memeImage } from "../../interfaces/I_meme";
-import { E_Curent_Actions, store } from "../../store/store";
+import { E_Curent_Actions } from "../../store/store";
 import Button from "../Button/Button";
 import SelectorEditor from "../SelectorEditor/SelectorEditor";
 import styles from "./MemeForm.module.css";
@@ -28,20 +28,20 @@ const MemeForm: FC<MemeFormProps> = (props) => {
       <SelectorEditor/>
       <form
         onChange={(event: FormEvent<HTMLFormElement>) => {
-          const changedMeme: I_meme = {
-            title: event.currentTarget["titre"].value,
-            text: event.currentTarget["text"].value,
-            x:parseInt(event.currentTarget["x"].value),
-            y: parseInt(event.currentTarget["y"].value),
-            fontSize: parseInt(event.currentTarget["fontSize"].value),
-            fontWeight: event.currentTarget["fontWeight"].value,
-            color: event.currentTarget["color"].value,
-            underline: event.currentTarget["underline"].checked,
-            italic: event.currentTarget["italic"].checked,
-            imageId:parseInt(event.currentTarget["image"].value),
-            id: undefined,
-          };
-          props.onMemeChange(changedMeme);
+          // const changedMeme: I_meme = {
+          //   title: event.currentTarget["titre"].value,
+          //   text: event.currentTarget["text"].value,
+          //   x:parseInt(event.currentTarget["x"].value),
+          //   y: parseInt(event.currentTarget["y"].value),
+          //   fontSize: parseInt(event.currentTarget["fontSize"].value),
+          //   fontWeight: event.currentTarget["fontWeight"].value,
+          //   color: event.currentTarget["color"].value,
+          //   underline: event.currentTarget["underline"].checked,
+          //   italic: event.currentTarget["italic"].checked,
+          //   imageId:parseInt(event.currentTarget["image"].value),
+          //   id: undefined,
+          // };
+          // props.onMemeChange(changedMeme);
         }}
         onSubmit={(evt:FormEvent<HTMLFormElement>)=>{
           evt.preventDefault();
@@ -52,13 +52,20 @@ const MemeForm: FC<MemeFormProps> = (props) => {
           <h1>Titre</h1>
         </label>
         <br />
-        <input name="titre" id="titre" defaultValue={props.meme.title}  />
+        <input name="titre" id="titre" 
+        value={props.meme.title} 
+        onChange={(evt)=>{props.onMemeChange({...props.meme,title:evt.currentTarget.value})}}  
+        />
         <hr />
         <label htmlFor="image">
           <h2>Image</h2>
         </label>
         <br />
-        <select name="image" id="image" defaultValue={props.meme.imageId}>
+        <select name="image" id="image" 
+        value={props.meme.imageId}
+        onChange={(evt)=>{props.onMemeChange({...props.meme,imageId:parseInt(evt.currentTarget.value)})}}  
+        
+        >
           {
             props.images.map((e: I_memeImage,pos:number)=>{
               return <option value={e.id} key={'option-img'+pos}>{e.title}</option>
@@ -70,7 +77,10 @@ const MemeForm: FC<MemeFormProps> = (props) => {
           <h2>texte</h2>
         </label>
         <br />
-        <input name="text" id="text" type="text" defaultValue={props.meme.text} />
+        <input name="text" id="text" type="text" 
+        value={props.meme.text} 
+        onChange={(evt)=>{props.onMemeChange({...props.meme,text:evt.currentTarget.value})}}  
+        />
         <br />
         <label htmlFor="x">
           <h2 style={{ display: "inline" }}>x :</h2>
@@ -80,7 +90,9 @@ const MemeForm: FC<MemeFormProps> = (props) => {
           name="x"
           id="x"
           type="number"
-          defaultValue={props.meme.x}
+          value={props.meme.x}
+          onChange={(evt)=>{props.onMemeChange({...props.meme,x:parseInt(evt.currentTarget.value)})}}  
+
         />
         <label htmlFor="y">
           <h2 style={{ display: "inline" }}>y :</h2>
@@ -90,7 +102,8 @@ const MemeForm: FC<MemeFormProps> = (props) => {
           name="y"
           id="y"
           type="number"
-          defaultValue={props.meme.y}
+          value={props.meme.y}
+          onChange={(evt)=>{props.onMemeChange({...props.meme,y:parseInt(evt.currentTarget.value)})}}  
         />
         <hr />
         <br />
@@ -98,7 +111,10 @@ const MemeForm: FC<MemeFormProps> = (props) => {
         <label htmlFor="color">
           <h2 style={{ display: "inline" }}>color :</h2>
         </label>
-        <input name="color" id="color" type="color" defaultValue={props.meme.color} />
+        <input name="color" id="color" type="color" 
+        value={props.meme.color} 
+        onChange={(evt)=>{props.onMemeChange({...props.meme,color:evt.currentTarget.value})}}  
+        />
         <br />
         <label htmlFor="fontSize">
           <h2 style={{ display: "inline" }}>font-size :</h2>
@@ -109,8 +125,9 @@ const MemeForm: FC<MemeFormProps> = (props) => {
           id="fontSize"
           type="number"
           min="0"
-          defaultValue={props.meme.fontSize}
-        />
+          value={props.meme.fontSize}
+          onChange={(evt)=>{props.onMemeChange({...props.meme,fontSize:parseInt(evt.currentTarget.value)})}}  
+          />
         px
         <br />
         <label htmlFor="fontWeight">
@@ -124,14 +141,16 @@ const MemeForm: FC<MemeFormProps> = (props) => {
           min="100"
           step="100"
           max="900"
-          defaultValue={props.meme.fontWeight}
-        />
+          value={props.meme.fontWeight}
+          onChange={(evt)=>{props.onMemeChange({...props.meme,fontWeight:evt.currentTarget.value})}}  
+          />
         <br />
         <input
           name="underline"
           id="underline"
           type="checkbox"
-          defaultChecked={props.meme.underline}
+          checked={props.meme.underline}
+          onChange={(evt)=>{props.onMemeChange({...props.meme,underline:evt.currentTarget.checked})}}  
         />
         &nbsp;
         <label htmlFor="underline">
@@ -146,7 +165,8 @@ const MemeForm: FC<MemeFormProps> = (props) => {
           name="italic"
           id="italic"
           type="checkbox"
-          defaultChecked={props.meme.italic}
+          checked={props.meme.italic}
+          onChange={(evt)=>{props.onMemeChange({...props.meme,italic:evt.currentTarget.checked})}}  
         />
         <hr />
         <br />

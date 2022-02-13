@@ -21,9 +21,9 @@ export const MemeThumbnail: React.FC<IMemeThumbnailProps> = (props) => {
     <div className={styles.MemeThumbnail} data-testid="MemeThumbnail">
       <FlexBoxThumbnail>
         {props.memes.map((e, pos) => (
-          <Link to={'/editor/'+e.id}>
+          <Link to={'/editor/'+e.id}  key={"meme-" + pos}>
             <MemeSvgViewerWithStoreImage
-              key={"meme-" + pos}
+             
               meme={e}
             />
           </Link>

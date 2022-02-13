@@ -27,7 +27,14 @@ const reducer = (state = initialState, action) => {
       });
       return state;
     case "ADD_MEME":
-      return { ...state, memes: [...state.memes, action.value] };
+    const position = state.memes.findIndex((m=>m.id===action.value.id));
+    if(position===-1){
+      //ajout direct
+      return { ...state, memes: [...state.memes, action.value] };}
+    else{
+      // remplacement à la position trouvé en fonction de l'id
+      return { ...state, memes: [...state.memes.slice(0,position),action.value,...state.memes.slice(position+1)] };
+    }
     default:
       return state;
   }
@@ -54,8 +61,8 @@ const currentReducer = (state = initialState_current, action) => {
     case E_Curent_Actions.UPDATE_CURRENT:
       return { ...state, ...action.value };
     case E_Curent_Actions.SAVE:
-      fetch("http://localhost:7956/memes", {
-        method: "POST",
+      fetch(`http://localhost:7956/memes${undefined!==state.id?'/'+state.id:''}`, {
+        method:( undefined!==state.id?"PUT":'POST'),
         headers: { "Content-Type": "application/json" },
         body:JSON.stringify(state)
       }).then(f=>f.json())

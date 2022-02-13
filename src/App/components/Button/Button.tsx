@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import style from './Button.module.css';
 import PropTypes from 'prop-types';
 
@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 interface I_PropsButton {
   onButtonClicked?:Function;
   //forcer l'array pour children
-  children:Array<any>;
+  children:Array<any>|ReactNode|string;
   bgColor?:string;
   type?:'button'|'submit'|'reset';
 }
